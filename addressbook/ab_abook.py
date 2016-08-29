@@ -16,7 +16,7 @@ class AddressBook(list):
         super().__init__()
         self.filename = None    # Used when working with opened file
 
-    def add_new(self, name, surname, email, phone):
+    def __append__(self, name, surname, email, phone):
         """Add a new person to the AddressBook by creating a new Person instance.
         Before adding a new item the function checks if there is not anybody
         with such a name + surname combination in the AddressBook. If so, the user is asked whether he/she wants to
@@ -32,14 +32,14 @@ class AddressBook(list):
 
         # with an empty list there's no need to check for duplicates
         if len(self) == 0:
-            self.append(Person(name, surname, email, phone))
+            super().append(Person(name, surname, email, phone))
             print('{0} {1} has been added to the base.'.format(name.title(), surname.title()))
         else:
             item = self.search_base(personid=c)
             try:
                 # no items with similar name and surname found
                 if item is None:
-                    self.append(Person(name, surname, email, phone))
+                    super().append(Person(name, surname, email, phone))
                     print('{0} {1} has been added to the base.'.format(name.title(), surname.title()))
                 # duplicates found
                 else:
@@ -49,7 +49,7 @@ class AddressBook(list):
                             '\nDo you want to add such a person anyway? y/n '.format(
                                 name.title(), surname.title())).lower()
                         if ask in ('y', 'yes'):
-                            self.append(Person(name, surname, email, phone))
+                            super().append(Person(name, surname, email, phone))
                             print('{0} {1} has been added to the base.'.format(name.title(), surname.title()))
                             break
                         elif ask in ('n', 'no'):

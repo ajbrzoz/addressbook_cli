@@ -316,7 +316,7 @@ class MainApp(object):
         while True:
             phone_inp = input('>> Phone: ')
             with exc_catcher():
-                self.abook.add_new(name_inp, surname_inp, email_inp, phone_inp)
+                self.abook.__append__(name_inp, surname_inp, email_inp, phone_inp)
                 break
 
         # if no new entry has been added, go back to AddressBook options

@@ -34,7 +34,7 @@ def abook_example(mock_input):
 
     for nm, sur, em, ph in zip(names, surnames, emails, phones):
         with suppress_stdout():
-            book.add_new(nm, sur, em, ph)
+            book.__append__(nm, sur, em, ph)
 
     for contact, c, st, b in zip(book, cities, streets, birthdays):
         to_set = {'city': c, 'street': st, 'birthday': b}
@@ -115,7 +115,7 @@ class TestPerson(unittest.TestCase):
                     '(42)5109999', '(42) 5109999', '42 510 99 99', '42 510-99-99')
 
     street_values = {'baker street 64': ('Baker St.', '64'),
-                     ('640 madison AVENUE'): ('Madison Av.', '640'),
+                     '640 madison AVENUE': ('Madison Av.', '640'),
                      'aleje Jerozolimskie 9': ('Al. Jerozolimskie', '9'),
                      '32 Mulholland drive': ('Mulholland Dr.', '32'),
                      '129 broad Road': ('Broad Rd.', '129'),
