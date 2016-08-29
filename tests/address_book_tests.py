@@ -327,7 +327,7 @@ class TestAddressBook(unittest.TestCase):
         """no duplicates found - user adds new item"""
         people001 = copy.deepcopy(self.people)
         print(len(people001))
-        people001.add_new(*self.none_vals[:4])
+        people001.__append__(*self.none_vals[:4])
         self.assertEqual(len(people001), 23)
         self.assertIsInstance(people001[-1], Person)
 
@@ -336,7 +336,7 @@ class TestAddressBook(unittest.TestCase):
         """duplicates found - user chooses not to add anything"""
         people002 = copy.deepcopy(self.people)
         length = len(people002)
-        people002.add_new(*self.standard_vals[:4])
+        people002.__append__(*self.standard_vals[:4])
         self.assertEqual(len(people002), length)
 
     @patch('builtins.input', return_value='y')
@@ -344,7 +344,7 @@ class TestAddressBook(unittest.TestCase):
         """duplicates found - user adds new item"""
         people003 = copy.deepcopy(self.people)
         length = len(people003)
-        people003.add_new(*self.standard_vals[:4])
+        people003.__append__(*self.standard_vals[:4])
         self.assertEqual(len(people003), length + 1)
 
     def test004_clear_base(self):
