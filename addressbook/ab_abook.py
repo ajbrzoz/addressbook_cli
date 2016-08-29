@@ -16,7 +16,32 @@ class AddressBook(list):
         super().__init__()
         self.filename = None    # Used when working with opened file
 
-    def __append__(self, name, surname, email, phone):
+    @staticmethod
+    def check(obj):
+        if not isinstance(obj, Person):
+            raise TypeError(obj)
+        else:
+            return obj
+
+    def append(self, obj):
+        return super().append(self.check(obj))
+
+    def insert(self, index, obj):
+        return super().insert(index, self.check(obj))
+
+    def extend(self, iterable):
+        return super().extend([self.check(i) for i in iterable])
+
+    def __add__(self, other):
+        return super().__add__(self.check(other))
+
+    def __setitem__(self, index, obj):
+        if isinstance(index, slice):
+            return super().__setitem__(index, [self.check(o) for o in obj])
+        else:
+            return super().__setitem__(index, self.check(obj))
+
+    def add_new(self, name, surname, email, phone):
         """Add a new person to the AddressBook by creating a new Person instance.
         Before adding a new item the function checks if there is not anybody
         with such a name + surname combination in the AddressBook. If so, the user is asked whether he/she wants to
