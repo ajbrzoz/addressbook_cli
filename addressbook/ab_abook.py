@@ -8,7 +8,6 @@ from addressbook.ab_person import *
 from addressbook.ab_helpers import *
 
 
-# noinspection PyTypeChecker
 class AddressBook(list):
     """Class for creating and modifying the AddressBook"""
 
